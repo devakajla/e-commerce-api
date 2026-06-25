@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta, timezone
 
-import bcrypt
+import bcrypt, secrets
 from jose import jwt, JWTError
 
 from app.config import settings
 
+def generate_reset_token() -> str:
+    return secrets.token_urlsafe(32)
 
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
